@@ -2,9 +2,11 @@ import requests
 import csv
 from bs4 import BeautifulSoup
 
+#Gaining access to the website
 URL = 'http://www.shanghairanking.com/ARWU2019.html'
 page = requests.get(URL)
 soup = BeautifulSoup(page.content, 'html.parser')
+#soup will select the html id/class to extract the content
 results1 = soup.table.find_all('tr',class_ = ["bgfd" , "bgf5"])
 results2 = soup.table.find_all(class_ = "bgf5")
 a=[]
@@ -24,6 +26,7 @@ for job_elem in results1:
             break
     b.append(c)
 
+#write it on the designated csv file
 with open('output.csv',  "w") as csvfile:
     writer = csv.writer(csvfile)
     for i in range( len(b)):
